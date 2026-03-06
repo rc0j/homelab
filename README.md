@@ -6,20 +6,20 @@
 
 For my homelab, I use KISS (Keep it simple, stupid!) principle as much as possible.
 
-**orion**:
+**The Servers**
 
 ```shell
          .://:`              `://:.            root@orion
        `hMMMMMMd/          /dMMMMMMh`          ----------
-        `sMMMMMMMd:      :mMMMMMMMs`           OS: Proxmox VE 9.0.11 x86_64
+        `sMMMMMMMd:      :mMMMMMMMs`           OS: Proxmox VE 9.1.6 x86_64
 `-/+oo+/:`.yMMMMMMMh-  -hMMMMMMMy.`:/+oo+/-`   Host: 12TES0G72C ThinkCentre M70q Gen 5
-`:oooooooo/`-hMMMMMMMyyMMMMMMMh-`/oooooooo:`   Kernel: 6.14.11-4-pve
-  `/oooooooo:`:mMMMMMMMMMMMMm:`:oooooooo/`     Uptime: 21 hours, 18 mins
-    ./ooooooo+- +NMMMMMMMMN+ -+ooooooo/.       Packages: 1131 (dpkg)
+`:oooooooo/`-hMMMMMMMyyMMMMMMMh-`/oooooooo:`   Kernel: 6.17.13-1-pve
+  `/oooooooo:`:mMMMMMMMMMMMMm:`:oooooooo/`     Uptime: 1 day, 20 hours, 16 mins
+    ./ooooooo+- +NMMMMMMMMN+ -+ooooooo/.       Packages: 1219 (dpkg)
       .+ooooooo+-`oNMMMMNo`-+ooooooo+.         Shell: bash 5.2.37
         -+ooooooo/.`sMMs`./ooooooo+-           CPU: Intel i5-14400T (16) @ 4.500GHz
           :oooooooo/`..`/oooooooo:             GPU: Intel Alder Lake-S GT1 [UHD Graphics 730]
-          :oooooooo/`..`/oooooooo:             Memory: 8524MiB / 15622MiB
+          :oooooooo/`..`/oooooooo:             Memory: 12385MiB / 15622MiB
         -+ooooooo/.`sMMs`./ooooooo+-
       .+ooooooo+-`oNMMMMNo`-+ooooooo+.
     ./ooooooo+- +NMMMMMMMMN+ -+ooooooo/.
@@ -111,10 +111,15 @@ graph TB
 
 None of these services are publicly available. I access everything using tailscale when not in localhost.
 
-| Host             | Service                                         | IP              |
-| ---------------- | ----------------------------------------------- | --------------- |
-| technitium-dns   | technitium                                      | 192.168.100.5   |
-| centreon-prod-v2 | Centreon Central (Monitoring server)            | 192.168.100.7   |
-| jellyfin         | Jellyfin Media Server + arr-stack               | 192.168.100.100 |
-| docker-node01    | Nginx Proxy Manager, myapps (homarr), syncthing | 192.168.100.8   |
-| docker-node02    | Dev of node01, for testing                      | 192.168.100.11  |
+| Host              | Service                                               | IP              |
+| ----------------- | ----------------------------------------------------- | --------------- |
+| technitium-dns    | technitium                                            | 192.168.100.5   |
+| centreon-prod-v2  | Centreon Central (Monitoring server)                  | 192.168.100.7   |
+| jellyfin          | Jellyfin Media Server + arr-stack                     | 192.168.100.100 |
+| VLMINECRAFT       | Minecraft server, powered by Crafty                   | 192.168.102.13  |
+| docker-node01     | Nginx Proxy Manager                                   | 192.168.100.8   |
+| orion-node02 (pi) | Sempahore                                             | 192.168.100.21  |
+| orion-node02 (pi) | Grafana + promethus, Syncthing (master node) + Homarr | 192.168.100.21  |
+
+Note: VLMINECRAFT runs in a totally isolated VLAN under the orion (primary proxmox host) and has no access to any other VMs or the host itself and is only accessible using a
+tailscale VPN and a specific user, **root is disabled**
