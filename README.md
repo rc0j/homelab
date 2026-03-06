@@ -31,22 +31,42 @@ For my homelab, I use KISS (Keep it simple, stupid!) principle as much as possib
          `://:`              `://:`
 ```
 
+```shell
+        _,met$$$$$gg.          root@orion-node02
+     ,g$$$$$$$$$$$$$$$P.       -----------------
+   ,g$$P""       """Y$$.".     OS: Debian GNU/Linux 13 (trixie) aarch64
+  ,$$P'              `$$$.     Host: FriendlyElec NanoPi NEO3
+',$$P       ,ggs.     `$$b:    Kernel: Linux 6.18.7-current-rockchip64
+`d$$'     ,$P"'   .    $$$     Uptime: 5 days, 6 hours, 25 mins
+ $$P      d$'     ,    $$P     Packages: 316 (dpkg)
+ $$:      $$.   -    ,d$$'     Shell: bash 5.2.37
+ $$;      Y$b._   _,d$P'       Terminal: dropbear
+ Y$$.    `.`"Y$$$$P"'          CPU: rk3328 (4) @ 1.30 GHz
+ `$$b      "-.__               Memory: 978.41 MiB / 1.93 GiB (50%)
+  `Y$$b                        Swap: Disabled
+   `Y$$.                       Disk (/): 9.48 GiB / 468.68 GiB (2%) - ext4
+     `$$b.                     Local IP (eth0): 192.168.100.21/24
+       `Y$$b.                  Locale: C.UTF-8
+         `"Y$b._
+             `""""
+```
+
 ## Diagram
 
 ```mermaid
 graph TB
     Internet[Internet/Gateway<br/>192.168.100.1]
-    
+
     subgraph Physical["Orion - Proxmox Hypervisor"]
         direction TB
         eno1[eno1<br/>Physical NIC]
-        
+
         subgraph Bridges["Network Bridges"]
             vmbr0[vmbr0<br/>192.168.100.20/24<br/>Main Bridge]
             vlan1[VLAN 1<br/>vlan-raw-device]
             vmbr1[vmbr1<br/>192.168.102.1/24<br/>VLAN Bridge]
         end
-        
+
         subgraph VMs["Virtual Machines & Containers"]
             technitium_dns[Technitium Master<br/>192.168.100.5<br/>Primary DNS + DHCP<br/>Debian 13 VM]
             centreon[Centreon-prod-v2<br/>Monitoring Server<br/>AlmaLinux 9 VM]
@@ -54,32 +74,32 @@ graph TB
             docker01[docker-node01<br/>Nginx Proxy Manager<br/>Reverse Proxy<br/>Debian 13 LXC]
             docker02[docker-node02<br/>Debian 13 LXC]
         end
-        
+
         eno1 --> vmbr0
         eno1 -.VLAN.-> vlan1
         vlan1 --> vmbr1
-        
+
         vmbr0 --> technitium_dns
         vmbr0 --> centreon
         vmbr0 --> jellyfin
         vmbr0 --> docker01
         vmbr0 --> docker02
     end
-    
+
     Internet <--> eno1
-    
+
     docker01 -.reverse proxy.-> jellyfin
-    
+
     technitium_dns -.DNS Primary.-> jellyfin
     technitium_dns -.DNS Primary.-> docker01
     technitium_dns -.DNS Primary.-> docker02
     technitium_dns -.DNS Primary.-> centreon
-    
+
     centreon -.monitors.-> technitium_dns
     centreon -.monitors.-> jellyfin
     centreon -.monitors.-> docker01
     centreon -.monitors.-> docker02
-    
+
     style technitium_dns fill:#2f855a,stroke:#38a169,stroke-width:3px,color:#fff
     style Physical fill:#2d3748,stroke:#4a5568,stroke-width:2px,color:#fff
     style Bridges fill:#1a365d,stroke:#2c5282,stroke-width:2px,color:#fff
@@ -87,15 +107,14 @@ graph TB
     style Internet fill:#742a2a,stroke:#9b2c2c,stroke-width:2px,color:#fff
 ```
 
-## Services: 
+## Services:
 
 None of these services are publicly available. I access everything using tailscale when not in localhost.
 
-| Host | Service | IP |
-|---|---|---|
-| technitium-dns | technitium | 192.168.100.5 |
-| centreon-prod-v2 | Centreon Central (Monitoring server) | 192.168.100.7 |
-| jellyfin | Jellyfin Media Server + arr-stack | 192.168.100.100 |
-| docker-node01 | Nginx Proxy Manager, myapps (homarr), syncthing | 192.168.100.8 |
-| docker-node02 | Dev of node01, for testing | 192.168.100.11
-
+| Host             | Service                                         | IP              |
+| ---------------- | ----------------------------------------------- | --------------- |
+| technitium-dns   | technitium                                      | 192.168.100.5   |
+| centreon-prod-v2 | Centreon Central (Monitoring server)            | 192.168.100.7   |
+| jellyfin         | Jellyfin Media Server + arr-stack               | 192.168.100.100 |
+| docker-node01    | Nginx Proxy Manager, myapps (homarr), syncthing | 192.168.100.8   |
+| docker-node02    | Dev of node01, for testing                      | 192.168.100.11  |
