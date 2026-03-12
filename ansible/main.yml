@@ -12,8 +12,6 @@
       tags: minimal_packages
     - role: bashrc
       tags: bashrc
-    - role: cron
-      tags: cron
     - role: swapfile
       tags: swapfile
     - role: update_motd
@@ -27,5 +25,5 @@
       tags: never, docker
     - role: backup_proxmox
       tags: never, backup_proxmox
-    - role: unbound-pihole
-      tags: never, unbound-pihole
+    - role: syncthing
+      tags: syncthing
