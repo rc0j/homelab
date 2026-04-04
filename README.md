@@ -32,6 +32,28 @@ For my homelab, I use KISS (Keep it simple, stupid!) principle as much as possib
 ```
 
 ```shell
+         .://:`              `://:.             root@orion-node02
+       `hMMMMMMd/          /dMMMMMMh`           -----------------
+        `sMMMMMMMd:      :mMMMMMMMs`            OS: Proxmox VE 9.1.7 x86_64
+`-/+oo+/:`.yMMMMMMMh-  -hMMMMMMMy.`:/+oo+/-`    Host: OptiPlex Micro 7010
+`:oooooooo/`-hMMMMMMMyyMMMMMMMh-`/oooooooo:`    Kernel: Linux 6.17.13-2-pve
+  `/oooooooo:`:mMMMMMMMMMMMMm:`:oooooooo/`      Uptime: 3 hours, 19 mins
+    ./ooooooo+- +NMMMMMMMMN+ -+ooooooo/.        Packages: 956 (dpkg)
+      .+ooooooo+-`oNMMMMNo`-+ooooooo+.          Shell: bash 5.2.37
+        -+ooooooo/.`sMMs`./ooooooo+-            Terminal: /dev/pts/1
+          :oooooooo/`..`/oooooooo:              CPU: 13th Gen Intel(R) Core(TM) i5-13500T (20) @ 3.20 GHz
+          :oooooooo/`..`/oooooooo:              GPU: Intel AlderLake-S GT1 @ 1.55 GHz [Integrated]
+        -+ooooooo/.`sMMs`./ooooooo+-            Memory: 2.04 GiB / 15.31 GiB (13%)
+      .+ooooooo+-`oNMMMMNo`-+ooooooo+.          Swap: Disabled
+    ./ooooooo+- +NMMMMMMMMN+ -+ooooooo/.        Disk (/): 11.43 GiB / 232.73 GiB (5%) - ext4
+  `/oooooooo:`:mMMMMMMMMMMMMm:`:oooooooo/`      Local IP (vmbr0): 192.168.100.22/24
+`:oooooooo/`-hMMMMMMMyyMMMMMMMh-`/oooooooo:`    Locale: en_US.UTF-8
+`-/+oo+/:`.yMMMMMMMh-  -hMMMMMMMy.`:/+oo+/-`
+        `sMMMMMMMm:      :dMMMMMMMs`
+       `hMMMMMMd/          /dMMMMMMh`
+```
+
+```shell
         _,met$$$$$gg.          root@orion-node02
      ,g$$$$$$$$$$$$$$$P.       -----------------
    ,g$$P""       """Y$$.".     OS: Debian GNU/Linux 13 (trixie) aarch64
