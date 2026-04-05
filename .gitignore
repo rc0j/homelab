@@ -6,3 +6,4 @@
 *.lock.hcl
 *.ansible
 *.DS_Store
+secrets.tfvars
