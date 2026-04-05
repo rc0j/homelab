@@ -6,7 +6,7 @@ terraform {
   }
 }
 
-# Configure the PiHole provider
+# PiHole Config
 provider "pihole" {
   url      = "http://192.168.100.5"
   password = var.pihole_password
