@@ -3,7 +3,7 @@
   hosts: all
 
   roles:
-# CORE:
+    # CORE:
     - role: ssh
       tags: ssh
     - role: system_tweaks
@@ -19,8 +19,8 @@
     - role: reboot
       tags: reboot
     - role: centreon_monitoring
-      tags: centreon_monitoring 
-# OPTIONAL:
+      tags: centreon_monitoring
+    # OPTIONAL:
     - role: docker
       tags: never, docker
     - role: backup_proxmox
