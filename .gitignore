@@ -1,8 +1,8 @@
 *.vscode
 *.secrets.yml
-*.sh
 *.tfstate
 *.terraform
 *.lock.hcl
 *.ansible
 *.DS_Store
+secrets.tfvars
