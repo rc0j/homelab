@@ -13,7 +13,7 @@ CONTAINER_IDS=("1108" "1199")  # docker-node01 only for now
 BACKUP_DIR="/var/lib/vz/dump"
 DEST_DIR="/backup/weekly-backup"
 RETENTION_DAYS=1
-NTFY_CHANNEL="ntfy.sh/backup_channel_HXkpCIzrDrcLFTAn"
+NTFY_CHANNEL="ntfy.sh/#"
 
 echo "===== PROXMOX BACKUP SCRIPT STARTED at $(date '+%Y-%m-%d %H:%M:%S') ====="
 echo "Emptying backup directory..."

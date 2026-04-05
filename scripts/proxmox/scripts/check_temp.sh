@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # --- CONFIGURATION ---
-WEBHOOK_URL="https://discord.com/api/webhooks/1395826641019863132/auk8N644uJYHJc9iaJIWK5CJOndEWIFLzmFUWp8uLEO19s61qoYKBooWYqXzJsy8zJsP"
+WEBHOOK_URL="#"
 SENSOR_LABEL="Package id 0"  # Adjust to your system (e.g. "Tctl" or "Core 0")
 WARNING_THRESHOLD=70
 CRITICAL_THRESHOLD=85
