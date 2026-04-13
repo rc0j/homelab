@@ -1,11 +1,3 @@
-#  ____  _ _           _        ____  _   _ ____
-# |  _ \(_) |__   ___ | | ___  |  _ \| \ | / ___|
-# | |_) | | '_ \ / _ \| |/ _ \ | | | |  \| \___ \
-# |  __/| | | | | (_) | |  __/ | |_| | |\  |___) |
-# |_|   |_|_| |_|\___/|_|\___| |____/|_| \_|____/
-#
-# Author: Raif Coonjah
-# DNS records for PiHole, NEVER manually modify on Pihole web.
 locals {
   dns_records = {
     "bitwarden"     = "192.168.100.99"
@@ -20,8 +12,8 @@ locals {
   }
 }
 
-resource "pihole_dns_record" "records" {
+resource "adguard_rewrite" "domain" {
   for_each = local.dns_records
   domain   = each.key
-  ip       = each.value
+  answer   = each.value
 }
