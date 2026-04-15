@@ -24,8 +24,11 @@ jobs:
           echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com trixie main" | tee /etc/apt/sources.list.d/hashicorp.list
           apt-get update && apt-get install terraform
 
+      - name: Create secrets.tfvars
+        run: echo "${{ secrets.ADGUARD_ADMIN_PASSWORD }}" > secrets.tfvars
+
       - name: Terraform Init
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan -input=false
+        run: terraform plan -var-file="secrets.tfvars"
