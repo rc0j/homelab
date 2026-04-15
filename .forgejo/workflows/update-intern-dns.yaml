@@ -2,6 +2,8 @@ name: Update AdGuard DNS
 on:
   push:
     branches: [main]
+    paths:
+      - 'terraform/prod/services/adguard-dns/**'
 
 jobs:
   terraform:
@@ -29,10 +31,10 @@ jobs:
           echo 'adguard_admin_password = "${{ secrets.ADGUARD_ADMIN_PASSWORD }}"' > secrets.tfvars
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -input=false
 
       - name: Terraform Plan
         run: terraform plan -var-file="secrets.tfvars"
 
       - name: Terraform apply
-        run: terraform apply -auto-approve -var-file="secrets.tfvars"
+        run: terraform apply -auto-approve -input=false -var-file="secrets.tfvars"
