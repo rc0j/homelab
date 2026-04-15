@@ -1,0 +1,26 @@
+name: Update AdGuard DNS
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  terraform:
+    runs-on: docker
+    container:
+      image: hashicorp/terraform:1.5.7
+
+    defaults:
+      run:
+        working-directory: ./terraform/prod/services
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan -input=false
