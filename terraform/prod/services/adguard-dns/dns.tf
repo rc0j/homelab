@@ -1,5 +1,6 @@
 locals {
   dns_records = {
+    "*.awesomesandwish.xyz" = "192.168.100.8"
     "bitwarden"     = "192.168.100.99"
     "centreon-prod" = "192.168.100.7"
     "dns"           = "192.168.100.5"
