@@ -3,6 +3,7 @@ on:
   push:
     branches: [main]
     paths:
+      - 'terraform/prod/services/adguard-dns/*'
       - 'terraform/prod/services/adguard-dns/**'
 
 jobs:
