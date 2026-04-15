@@ -1,9 +1,5 @@
-name: Update AdGuard DNS
-on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
+name: Update DNS on AdGuardHome
+on: [push]
 
 jobs:
   terraform:
