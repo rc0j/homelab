@@ -2,27 +2,27 @@ name: Update AdGuard DNS
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
   terraform:
     runs-on: docker
     container:
-      image: hashicorp/terraform:1.5.7
+      image: node:20-bookworm
 
     defaults:
       run:
         working-directory: ./terraform/prod/services
 
     steps:
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Install Terraform
+        run: |
+          apt-get update && apt-get install -y gnupg software-properties-common curl
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/hashicorp.list
+          apt-get update && apt-get install terraform=1.5.7
 
       - name: Terraform Init
         run: terraform init
