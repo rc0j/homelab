@@ -11,7 +11,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./terraform/prod/services
+        working-directory: terraform/prod/services/adguard-dns
 
     steps:
       - name: Checkout code
