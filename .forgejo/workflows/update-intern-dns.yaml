@@ -7,7 +7,7 @@ jobs:
   terraform:
     runs-on: docker
     container:
-      image: node:trixie # pulled manually due to some weird permission issues ??? #TODO FIX THIS! 
+      image: node:trixie # pulled manually due to some weird permission issues ??? #TODO FIX THIS!
 
     defaults:
       run:
@@ -23,7 +23,7 @@ jobs:
           curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
           echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com trixie main" | tee /etc/apt/sources.list.d/hashicorp.list
           apt-get update && apt-get install terraform
-      
+
       - name: Create secrets.tfvars
         run: |
           echo 'adguard_admin_password = "${{ secrets.ADGUARD_ADMIN_PASSWORD }}"' > secrets.tfvars
@@ -33,3 +33,6 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan -var-file="secrets.tfvars"
+
+      - name: Terraform apply
+        run: terraform apply -var-file="secrets.tfvars"
