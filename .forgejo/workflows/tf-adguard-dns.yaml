@@ -7,8 +7,10 @@ on:
     branches: [main]
 
 jobs:
-  terraform:
+  test-alpine:
     runs-on: docker
+    container:
+      image: alpine:latest
 
     defaults:
       run:
