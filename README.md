@@ -145,3 +145,7 @@ None of these services are publicly available. I access everything using tailsca
 
 Note: VLMINECRAFT runs in a totally isolated VLAN under the orion (primary proxmox host) and has no access to any other VMs or the host itself and is only accessible using a
 tailscale VPN and a specific user, **root is disabled**
+
+---
+
+Mirror from internal gitea instance.
