@@ -7,7 +7,7 @@ jobs:
   terraform:
     runs-on: docker
     container:
-      image: node:20-bookworm
+      image: node:trixie # pulled manually due to some weird permission issues ??? #TODO FIX THIS! 
 
     defaults:
       run:
