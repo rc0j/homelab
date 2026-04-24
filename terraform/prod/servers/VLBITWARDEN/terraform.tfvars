@@ -4,7 +4,7 @@ pm_api_url = "https://192.168.100.20:8006/api2/json"
 target-node = "orion"
 # === vm information
 name = ["VLBITWARDEN"]
-vmid = ["19205"]
+vmid = ["19299"]
 ipconfig0 = ["ip=192.168.100.96/24,gw=192.168.100.1"]
 macaddr = ["BC:24:11:00:4B:63"]
 bridge = "vmbr0"
