@@ -1,6 +1,5 @@
 locals {
   dns_records = {
-    "*.awesomesandwish.xyz" = "192.168.100.8"
     "bitwarden"     = "192.168.100.99"
     "centreon-prod" = "192.168.100.7"
     "dns"           = "192.168.100.5"
@@ -10,7 +9,6 @@ locals {
     "orion"         = "192.168.100.20"
     "orion-node02"  = "192.168.100.22"
     "pi"            = "192.168.100.21"
-    "git"           = "192.168.100.11"
   }
 }
 
