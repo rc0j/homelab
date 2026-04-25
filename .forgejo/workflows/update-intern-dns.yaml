@@ -34,9 +34,10 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -var-file="secrets.tfvars"
 
-      - name: Run Terraform Plan
+      - name: Run Terraform Plan and Apply
         run: |
           ssh -o StrictHostKeyChecking=no $SSH_USER@192.168.100.98 << 'EOF'
             cd /home/raif.coonjah/infrastructure/terraform/prod/services/adguard-dns
-            terraform plan -var-file="secrets.tfvars"
+            terraform plan -var-file="secrets.tfvars" -out=tfplan_adguard-dns
+            terraform apply -auto-approve tfplan_adguard-dns
           EOF
