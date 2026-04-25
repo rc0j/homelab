@@ -35,8 +35,11 @@ jobs:
         run: terraform plan -var-file="secrets.tfvars"
 
       - name: Run Terraform Plan and Apply
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }} # Ensure this is mapped from your secrets
         run: |
           ssh -o StrictHostKeyChecking=no $SSH_USER@192.168.100.98 << 'EOF'
+            set -e
             cd /home/raif.coonjah/infrastructure/terraform/prod/services/adguard-dns
             terraform plan -var-file="secrets.tfvars" -out=tfplan_adguard-dns
             terraform apply -auto-approve tfplan_adguard-dns
