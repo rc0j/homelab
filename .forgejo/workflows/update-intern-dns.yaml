@@ -2,13 +2,15 @@ name: Update AdGuard DNS
 on:
   push:
     branches: [main]
+    paths:
+      - 'terraform/prod/services/adguard-dns/**'
 
 jobs:
   terraform:
     runs-on: docker
     container:
       image: node:trixie # pulled manually due to some weird permission issues ??? #TODO FIX THIS!
-h
+
     defaults:
       run:
         working-directory: terraform/prod/services/adguard-dns
@@ -34,13 +36,5 @@ h
       - name: Terraform Plan
         run: terraform plan -var-file="secrets.tfvars"
 
-      - name: Run Terraform Plan and Apply
-        env:
-          SSH_USER: ${{ secrets.SSH_USER }} # Ensure this is mapped from your secrets
-        run: |
-          ssh -o StrictHostKeyChecking=no $SSH_USER@192.168.100.98 << 'EOF'
-            set -e
-            cd /home/raif.coonjah/infrastructure/terraform/prod/services/adguard-dns
-            terraform plan -var-file="secrets.tfvars" -out=tfplan_adguard-dns
-            terraform apply -auto-approve tfplan_adguard-dns
-          EOF
+      - name: Terraform apply
+        run: terraform apply -auto-approve -input=false -var-file="secrets.tfvars"
