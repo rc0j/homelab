@@ -4,10 +4,6 @@ terraform {
       source  = "telmate/proxmox"
       version = " 3.0.2-rc07"
     }
-    time = {
-      source  = "hashicorp/time"
-      version = "~> 0.9"
-    }
   }
 }
 

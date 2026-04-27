@@ -43,3 +43,4 @@ resource "proxmox_vm_qemu" "cloudinit" {
 
     }
 }
+

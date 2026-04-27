@@ -8,7 +8,7 @@ jobs:
     runs-on: docker
     container:
       image: node:trixie # pulled manually due to some weird permission issues ??? #TODO FIX THIS!
-
+h
     defaults:
       run:
         working-directory: terraform/prod/services/adguard-dns
