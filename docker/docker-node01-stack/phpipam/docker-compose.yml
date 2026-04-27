@@ -1,0 +1,56 @@
+services:
+  phpipam-db:
+    image: mariadb:10.11
+    container_name: phpipam-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: secret_root_pass
+      MYSQL_DATABASE: phpipam
+      MYSQL_USER: phpipam
+      MYSQL_PASSWORD: secret_phpipam_pass
+    volumes:
+      - phpipam-db:/var/lib/mysql
+    networks:
+      - phpipam
+
+  phpipam-web:
+    image: phpipam/phpipam-www:latest
+    container_name: phpipam-web
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      - TZ=Indian/Mauritius
+      - IPAM_DATABASE_HOST=phpipam-db
+      - IPAM_DATABASE_USER=phpipam
+      - IPAM_DATABASE_PASS=secret_phpipam_pass
+      - IPAM_DATABASE_NAME=phpipam
+    volumes:
+      - phpipam-logo:/phpipam/css/images/logo
+    depends_on:
+      - phpipam-db
+    networks:
+      - phpipam
+
+  phpipam-cron:
+    image: phpipam/phpipam-cron:latest
+    container_name: phpipam-cron
+    restart: unless-stopped
+    environment:
+      - TZ=Indian/Mauritius
+      - IPAM_DATABASE_HOST=phpipam-db
+      - IPAM_DATABASE_USER=phpipam
+      - IPAM_DATABASE_PASS=secret_phpipam_pass
+      - IPAM_DATABASE_NAME=phpipam
+      - SCAN_INTERVAL=1h
+    depends_on:
+      - phpipam-db
+    networks:
+      - phpipam
+
+volumes:
+  phpipam-db:
+  phpipam-logo:
+
+networks:
+  phpipam:
